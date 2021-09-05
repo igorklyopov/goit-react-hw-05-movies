@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Route, Switch, Redirect, useParams } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -15,6 +16,9 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import "./index.css";
 //////////////////////////////////
+import HomePage from "./pages/HomePage/HomePage";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
+import MovieInfoView from "./pages/MoviesPage/MovieInfoView/MovieInfoView";
 import { useState, useEffect } from "react";
 import {
   fetchMoviesByName,
@@ -70,101 +74,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Album() {
-  const [movies, setMovies] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  useEffect(() => {
-    fetchPopularMoviesDay(pageNumber).then((movies) => {
-      console.log(movies.results);
-      setMovies(movies.results);
-    });
-  }, [pageNumber]);
-
+export default function App() {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
-        <Toolbar>
+        <Toolbar component="nav">
           {/* <CameraIcon className={classes.icon} /> */}
-          <Typography variant="h6" color="inherit" noWrap>
-            Movies layout
-          </Typography>
+          <ul>
+            <li>
+              <NavLink
+                exact
+                to="/"
+                className="link-nav"
+                activeClassName="active-link-nav"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/movies"
+                className="link-nav"
+                activeClassName="active-link-nav"
+              >
+                Movies
+              </NavLink>
+            </li>
+          </ul>
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
-        <div className="content">
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
-              Trending today
-            </Typography>
-            {/* <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
-            </Typography> */}
-            {/* <div className={classes.heroButtons}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div> */}
-          </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {movies.map((movie) => (
-              <Grid item key={movie.id} xs={12} sm={6} md={4}>
-                <Card
-                  className={classes.card}
-                  onClick={() => console.log("click card")}
-                >
-                  <CardMedia
-                    component="img"
-                    className={classes.cardMedia}
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                    alt={movie.title}
-                    title={movie.title}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {movie.title}
-                    </Typography>
-                    {/* <Typography>{movie.overview}</Typography> */}
-                  </CardContent>
-                  <CardActions>
-                    {/* <Button size="small" color="primary">
-                      View
-                    </Button> */}
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route path="/movies" exact>
+            <MoviesPage />
+          </Route>
+          <Route path="/movies/:movieId">
+            <MovieInfoView />
+          </Route>
+          <Route>
+            <Redirect to="/" />
+          </Route>
+        </Switch>
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
@@ -185,76 +141,3 @@ export default function Album() {
     </React.Fragment>
   );
 }
-
-///////////////////////////////////////////////
-// const Status = {
-//   IDLE: "idle",
-//   PENDING: "pending",
-//   RESOLVED: "resolved",
-//   REJECTED: "rejected",
-// };
-
-// function App() {
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [pageNumber, setPageNumber] = useState(1);
-//   const [images, setImages] = useState([]);
-//   const [moreImagesPerPage, setMoreImagesPerPage] = useState(false);
-//   const [status, setStatus] = useState(Status.IDLE);
-//   const [error, setError] = useState(null);
-
-//   // useEffect(() => {
-//   //   if (searchQuery !== "") getImages(searchQuery, pageNumber);
-//   // }, [searchQuery, pageNumber]);
-
-//   const getImages = (pageNumber) => {
-//     fetchPopularMoviesDay(pageNumber).then((movies) => {
-//       setImages((prevMovies) => [...prevMovies, ...movies.results]);
-//       setStatus(Status.RESOLVED);
-
-//       // if (images.total === 0) {
-//       //   setStatus(Status.REJECTED);
-//       //   setError("No images for this request!");
-
-//       //   return;
-//       // }
-
-//       // images.total > IMAGES_PER_PAGE
-//       //   ? setMoreImagesPerPage(true)
-//       //   : setMoreImagesPerPage(false);
-
-//       // if (pageNumber > 1) {
-//       //   scrollDown();
-//       // }
-//     });
-//     // .catch((error) => {
-//     //   setError(error.message);
-//     //   setStatus(Status.REJECTED);
-//     // });
-//   };
-
-//   // const onSearchFormSubmit = (searchQuery) => {
-//   //   setSearchQuery(searchQuery);
-//   //   setImages([]);
-//   //   setPageNumber(1);
-
-//   //   if (searchQuery === "") {
-//   //     setStatus(Status.REJECTED);
-//   //     setError("Please enter your request!");
-//   //   }
-//   // };
-
-//   // const onLoadMoreBtnClick = () => {
-//   //   setStatus(Status.PENDING);
-//   //   setPageNumber((prevPageNumber) => prevPageNumber + 1);
-//   // };
-
-//   // getImages(1);
-
-//   return (
-//     <>
-//       <ul>
-//         <li>test</li>
-//       </ul>
-//     </>
-//   );
-// }

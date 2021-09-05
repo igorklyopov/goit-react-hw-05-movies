@@ -5,34 +5,41 @@ const API_KEY = "0425708b766634a264f7b84cc81ebcd7";
 
 // export { BASE_URL, API_KEY, SEARCH_MOVIE, TRENDING_DAY };
 
+function handlingResponseStatus(response) {
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error("Sorry, something went wrong ...");
+}
+
 function fetchMoviesByName(movieName, pageNumber) {
   return fetch(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${pageNumber}&language=en-US&include_adult=false&query=${movieName}`
-  ).then((response) => response.json());
+  ).then(handlingResponseStatus);
 }
 
 function fetchPopularMoviesDay(pageNumber) {
   return fetch(
     `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${pageNumber}&language=en-US`
-  ).then((response) => response.json());
+  ).then(handlingResponseStatus);
 }
 
 function fetchMovieById(movieId) {
   return fetch(
     `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-  ).then((response) => response.json());
+  ).then(handlingResponseStatus);
 }
 
 function fetchMovieCast(movieId) {
   return fetch(
     `${BASE_URL}/movie/${movieId}?credits?api_key=${API_KEY}&language=en-US`
-  ).then((response) => response.json());
+  ).then(handlingResponseStatus);
 }
 
 function fetchMovieReviews(movieId, pageNumber) {
   return fetch(
     `${BASE_URL}/movie/${movieId}?reviews?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
-  ).then((response) => response.json());
+  ).then(handlingResponseStatus);
 }
 
 export {

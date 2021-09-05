@@ -16,4 +16,14 @@ code {
 /* .content {
   background-color: chartreuse;
 } */
+
+.link-nav {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.active-link-nav {
+  color: rgb(246, 250, 25);
+  text-decoration: none;
+}
 /* ============ */
