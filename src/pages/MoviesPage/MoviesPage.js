@@ -25,6 +25,7 @@ import {
   fetchMovieCast,
   fetchMovieReviews,
 } from "../../services/moviesApiService";
+import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 ///////////////////////////////////
 
@@ -60,75 +61,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const Status = {
-//   IDLE: "idle",
-//   PENDING: "pending",
-//   RESOLVED: "resolved",
-//   REJECTED: "rejected",
-// };
-
 export default function MoviesPage() {
-  // const [searchQuery, setSearchQuery] = useState("");
-  // const [pageNumber, setPageNumber] = useState(1);
-  // const [images, setImages] = useState([]);
-  // const [moreImagesPerPage, setMoreImagesPerPage] = useState(false);
-  // const [status, setStatus] = useState(Status.IDLE);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   if (searchQuery !== "") getImages(searchQuery, pageNumber);
-  // }, [searchQuery, pageNumber]);
-
-  // const getImages = (searchQuery, pageNumber) => {
-  //   fetchMoviesByName(searchQuery, pageNumber)
-  //     .then((images) => {
-  //       setImages((prevImages) => [...prevImages, ...images.hits]);
-  //       setStatus(Status.RESOLVED);
-
-  //       if (images.total === 0) {
-  //         setStatus(Status.REJECTED);
-  //         setError("No images for this request!");
-
-  //         return;
-  //       }
-
-  //       images.total > IMAGES_PER_PAGE
-  //         ? setMoreImagesPerPage(true)
-  //         : setMoreImagesPerPage(false);
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message);
-  //       setStatus(Status.REJECTED);
-  //     });
-  // };
-
-  // const onSearchFormSubmit = (searchQuery) => {
-  //   setSearchQuery(searchQuery);
-  //   setImages([]);
-  //   setPageNumber(1);
-
-  //   if (searchQuery === "") {
-  //     setStatus(Status.REJECTED);
-  //     setError("Please enter your request!");
-  //   }
-  // };
-
   const classes = useStyles();
+  const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
   // const [movieName, setMovieName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const { url } = useRouteMatch();
-  console.log(url);
 
   useEffect(() => {
     if (searchQuery === "") {
       return;
     }
+    setLoadStatus(loadingStatus.PENDING);
+
     fetchMoviesByName(searchQuery, pageNumber)
       .then((movies) => {
         // console.log(movies);
         setMovies(movies.results);
+        setLoadStatus(loadingStatus.RESOLVED);
       })
       .catch(() => console.error("fetchMoviesByName response not Ok"));
   }, [searchQuery, pageNumber]);
@@ -154,8 +106,14 @@ export default function MoviesPage() {
           >
             Movies search
           </Typography>
-          <SearchMoviesForm getFormData={onSearchFormSubmit} />
-          <MoviesGallery movies={movies} url={url} />
+          {loadStatus === loadingStatus.IDLE && (
+            <SearchMoviesForm getFormData={onSearchFormSubmit} />
+          )}
+          {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+          {loadStatus === loadingStatus.RESOLVED && (
+            <MoviesGallery movies={movies} url={url} />
+          )}
+          {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
           {/* <Typography
               variant="h5"
               align="center"

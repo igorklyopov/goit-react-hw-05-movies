@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
 import { Route, useParams } from "react-router";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import { BASE_IMG_URL } from "../../../services/moviesApiConstants";
 import { fetchMovieById } from "../../../services/moviesApiService";
+import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
+
+import MovieReviewsView from "../MovieReviewsView/MovieReviewsView";
+import MovieCastView from "../MovieCastView/MovieCastView";
 
 export default function MovieInfoView() {
+  const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url } = useRouteMatch();
 
   useEffect(() => {
+    setLoadStatus(loadingStatus.PENDING);
+
     fetchMovieById(movieId).then((result) => {
       setMovie(result);
+      setLoadStatus(loadingStatus.RESOLVED);
     });
   }, [movieId]);
 
@@ -21,41 +30,46 @@ export default function MovieInfoView() {
 
   return (
     <>
-      {movie && (
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-            alt={movie.title}
-            width="250"
-          />
-          <h3>{movie.title}</h3>
-          <p>{movie.release_date}</p>
-          <p>
-            <span>Genre: </span>
-            <span>{movieGenres}</span>
-          </p>
-          <p>{movie.overview}</p>
-          <p>
-            {movie.vote_average !== 0 ? (
-              <>
-                <span>rating: </span>
-                <span>{movie.vote_average} </span>
-                <span>(based on {movie.vote_count} reviews)</span>
-              </>
-            ) : (
-              <span> No reviews yet </span>
-            )}
-          </p>
-        </div>
+      {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+      {loadStatus === loadingStatus.RESOLVED && (
+        <>
+          <div>
+            <img
+              src={`${BASE_IMG_URL}${movie.poster_path}`}
+              alt={movie.title}
+              width="250"
+            />
+            <h3>{movie.title}</h3>
+            <p>{movie.release_date}</p>
+            <p>
+              <span>Genre: </span>
+              <span>{movieGenres}</span>
+            </p>
+            <p>{movie.overview}</p>
+            <p>
+              {movie.vote_average !== 0 ? (
+                <>
+                  <span>rating: </span>
+                  <span>{movie.vote_average} </span>
+                  <span>(based on {movie.vote_count} reviews)</span>
+                </>
+              ) : (
+                <span> No reviews yet </span>
+              )}
+            </p>
+          </div>
+
+          <NavLink to={`${url}/cast`}>Cast</NavLink>
+          <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+          <Route path="/movies/:movieId/cast">
+            <MovieCastView />
+          </Route>
+          <Route path="/movies/:movieId/reviews">
+            <MovieReviewsView />
+          </Route>
+        </>
       )}
-      <NavLink to={`${url}/cast`}>Cast</NavLink>
-      <NavLink to={`${url}/reviews`}>Reviews</NavLink>
-      <Route path="/movies/:movieId/cast">
-        <h1>cast</h1>
-      </Route>
-      <Route path="/movies/:movieId/reviews">
-        <h1>reviews</h1>
-      </Route>
+      {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
     </>
   );
 }

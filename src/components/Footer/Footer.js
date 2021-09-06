@@ -14,23 +14,25 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import "./index.css";
+import "../../index.css";
 //////////////////////////////////
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import HomePage from "./pages/HomePage/HomePage";
-import MoviesPage from "./pages/MoviesPage/MoviesPage";
-import MovieInfoView from "./pages/MoviesPage/MovieInfoView/MovieInfoView";
+
 import { useState, useEffect } from "react";
-import {
-  fetchMoviesByName,
-  fetchPopularMoviesDay,
-  fetchMovieById,
-  fetchMovieCast,
-  fetchMovieReviews,
-} from "./services/moviesApiService";
 
 ///////////////////////////////////
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -64,30 +66,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function App() {
+export default function Footer() {
   const classes = useStyles();
 
   return (
     <>
-      <CssBaseline />
-      <Header />
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/movies" exact>
-            <MoviesPage />
-          </Route>
-          <Route path="/movies/:movieId">
-            <MovieInfoView />
-          </Route>
-          <Route>
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </main>
-      <Footer />
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </footer>
     </>
   );
 }

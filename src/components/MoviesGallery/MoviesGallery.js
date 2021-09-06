@@ -16,7 +16,7 @@ import Container from "@material-ui/core/Container";
 // import Link from "@material-ui/core/Link";
 import "../../index.css";
 //////////////////////////////////
-
+import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 ///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,7 @@ export default function MoviesGallery({ movies, url }) {
               <CardMedia
                 component="img"
                 className={classes.cardMedia}
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                src={`${BASE_IMG_URL}${movie.poster_path}`}
                 alt={movie.title}
                 title={movie.title}
               />

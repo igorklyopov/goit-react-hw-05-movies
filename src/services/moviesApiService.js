@@ -1,9 +1,4 @@
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "0425708b766634a264f7b84cc81ebcd7";
-// const SEARCH_MOVIE = "search/movie"; //получение фильма по названию
-// const TRENDING_DAY = "trending/movie/day"; //получение самых популярных фильмов за день
-
-// export { BASE_URL, API_KEY, SEARCH_MOVIE, TRENDING_DAY };
+import { BASE_URL, API_KEY } from "./moviesApiConstants";
 
 function handlingResponseStatus(response) {
   if (response.ok) {
@@ -32,13 +27,13 @@ function fetchMovieById(movieId) {
 
 function fetchMovieCast(movieId) {
   return fetch(
-    `${BASE_URL}/movie/${movieId}?credits?api_key=${API_KEY}&language=en-US`
+    `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
   ).then(handlingResponseStatus);
 }
 
 function fetchMovieReviews(movieId, pageNumber) {
   return fetch(
-    `${BASE_URL}/movie/${movieId}?reviews?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
+    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
   ).then(handlingResponseStatus);
 }
 

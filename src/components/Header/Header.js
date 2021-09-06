@@ -14,21 +14,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import "./index.css";
+import "../../index.css";
 //////////////////////////////////
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import HomePage from "./pages/HomePage/HomePage";
-import MoviesPage from "./pages/MoviesPage/MoviesPage";
-import MovieInfoView from "./pages/MoviesPage/MovieInfoView/MovieInfoView";
+
 import { useState, useEffect } from "react";
-import {
-  fetchMoviesByName,
-  fetchPopularMoviesDay,
-  fetchMovieById,
-  fetchMovieCast,
-  fetchMovieReviews,
-} from "./services/moviesApiService";
 
 ///////////////////////////////////
 
@@ -64,30 +53,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function App() {
+export default function Header() {
   const classes = useStyles();
 
   return (
-    <>
-      <CssBaseline />
-      <Header />
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/movies" exact>
-            <MoviesPage />
-          </Route>
-          <Route path="/movies/:movieId">
-            <MovieInfoView />
-          </Route>
-          <Route>
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </main>
-      <Footer />
-    </>
+    <AppBar position="relative">
+      <Toolbar component="nav">
+        {/* <CameraIcon className={classes.icon} /> */}
+        <ul>
+          <li>
+            <NavLink
+              exact
+              to="/"
+              className="link-nav"
+              activeClassName="active-link-nav"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/movies"
+              className="link-nav"
+              activeClassName="active-link-nav"
+            >
+              Movies
+            </NavLink>
+          </li>
+        </ul>
+      </Toolbar>
+    </AppBar>
   );
 }

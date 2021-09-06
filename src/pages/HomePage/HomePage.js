@@ -19,6 +19,7 @@ import {
   fetchMovieCast,
   fetchMovieReviews,
 } from "../../services/moviesApiService";
+import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 ///////////////////////////////////
 
@@ -55,23 +56,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HomePage() {
+  const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
+    setLoadStatus(loadingStatus.PENDING);
+
     fetchPopularMoviesDay(pageNumber).then((movies) => {
       // console.log(movies.results);
       setMovies(movies.results);
+      setLoadStatus(loadingStatus.RESOLVED);
     });
   }, [pageNumber]);
 
-  const { url } = useRouteMatch();
-  console.log(url);
+  // const { url } = useRouteMatch();
+  // console.log(url);
 
+  const onNextPageClick = () => {
+    setPageNumber(pageNumber + 1);
+    console.log("onLoadMoreClick");
+  };
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container className={classes.cardGrid} maxWidth="md">
         <Typography
@@ -83,8 +92,15 @@ export default function HomePage() {
         >
           Trending today
         </Typography>
-        <MoviesGallery movies={movies} url={"/movies"} />
+        {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+        {loadStatus === loadingStatus.RESOLVED && (
+          <MoviesGallery movies={movies} url={"/movies"} />
+        )}
+        {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
+        <button type="button" onClick={onNextPageClick}>
+          Load more
+        </button>
       </Container>
-    </React.Fragment>
+    </>
   );
 }

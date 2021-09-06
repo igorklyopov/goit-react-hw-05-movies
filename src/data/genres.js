@@ -21,3 +21,48 @@ const genres = [
 ];
 
 export { genres };
+
+// const [searchQuery, setSearchQuery] = useState("");
+// const [pageNumber, setPageNumber] = useState(1);
+// const [images, setImages] = useState([]);
+// const [moreImagesPerPage, setMoreImagesPerPage] = useState(false);
+// const [status, setStatus] = useState(Status.IDLE);
+// const [error, setError] = useState(null);
+
+// useEffect(() => {
+//   if (searchQuery !== "") getImages(searchQuery, pageNumber);
+// }, [searchQuery, pageNumber]);
+
+// const getImages = (searchQuery, pageNumber) => {
+//   fetchMoviesByName(searchQuery, pageNumber)
+//     .then((images) => {
+//       setImages((prevImages) => [...prevImages, ...images.hits]);
+//       setStatus(Status.RESOLVED);
+
+//       if (images.total === 0) {
+//         setStatus(Status.REJECTED);
+//         setError("No images for this request!");
+
+//         return;
+//       }
+
+//       images.total > IMAGES_PER_PAGE
+//         ? setMoreImagesPerPage(true)
+//         : setMoreImagesPerPage(false);
+//     })
+//     .catch((error) => {
+//       setError(error.message);
+//       setStatus(Status.REJECTED);
+//     });
+// };
+
+// const onSearchFormSubmit = (searchQuery) => {
+//   setSearchQuery(searchQuery);
+//   setImages([]);
+//   setPageNumber(1);
+
+//   if (searchQuery === "") {
+//     setStatus(Status.REJECTED);
+//     setError("Please enter your request!");
+//   }
+// };
