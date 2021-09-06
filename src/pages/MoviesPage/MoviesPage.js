@@ -93,7 +93,7 @@ export default function MoviesPage() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       {/* Hero unit */}
       <div className="content">
@@ -142,6 +142,6 @@ export default function MoviesPage() {
         </Container>
       </div>
       {/* End hero unit */}
-    </React.Fragment>
+    </>
   );
 }

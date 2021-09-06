@@ -13,7 +13,7 @@ export default function MovieInfoView() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const { url } = useRouteMatch();
+  const { url, path } = useRouteMatch();
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
@@ -34,7 +34,7 @@ export default function MovieInfoView() {
       {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
         <>
-          <div>
+          <section>
             <img
               src={`${BASE_IMG_URL}${movie.poster_path}`}
               alt={movie.title}
@@ -58,14 +58,13 @@ export default function MovieInfoView() {
                 <span> No reviews yet </span>
               )}
             </p>
-          </div>
-
+          </section>
           <NavLink to={`${url}/cast`}>Cast</NavLink>
           <NavLink to={`${url}/reviews`}>Reviews</NavLink>
-          <Route path="/movies/:movieId/cast">
+          <Route path={`${path}/cast`}>
             <MovieCastView />
           </Route>
-          <Route path="/movies/:movieId/reviews">
+          <Route path={`${path}/reviews`}>
             <MovieReviewsView />
           </Route>
         </>

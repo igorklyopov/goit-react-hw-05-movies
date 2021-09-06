@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { BASE_IMG_URL } from "../../../services/moviesApiConstants";
 import { fetchMovieCast } from "../../../services/moviesApiService";
 import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
 import Loader from "../../../components/Loader/Loader";
+import Cast from "../../../components/Cast/Cast";
 
 export default function MovieCastView() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -22,25 +22,7 @@ export default function MovieCastView() {
   return (
     <>
       {loadStatus === loadingStatus.PENDING && <Loader />}
-      {loadStatus === loadingStatus.RESOLVED && (
-        <div>
-          <ul>
-            {cast &&
-              cast.map((item) => (
-                <li key={item.id}>
-                  {" "}
-                  <img
-                    src={`${BASE_IMG_URL}${item.profile_path}`}
-                    alt={item.name}
-                    width="250"
-                  />
-                  <p>{item.name}</p>
-                  <p>{item.character}</p>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
+      {loadStatus === loadingStatus.RESOLVED && <Cast castData={cast} />}
       {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
     </>
   );
