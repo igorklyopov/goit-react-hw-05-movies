@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { BASE_IMG_URL } from "../../../services/moviesApiConstants";
 import { fetchMovieCast } from "../../../services/moviesApiService";
 import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
+import Loader from "../../../components/Loader/Loader";
 
 export default function MovieCastView() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -20,7 +21,7 @@ export default function MovieCastView() {
 
   return (
     <>
-      {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+      {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
         <div>
           <ul>

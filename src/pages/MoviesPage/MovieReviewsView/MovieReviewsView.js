@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { fetchMovieReviews } from "../../../services/moviesApiService";
 import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
+import Loader from "../../../components/Loader/Loader";
 // let movieId = 385128;
 let pageNumber = 1;
 export default function MovieReviewsView() {
@@ -19,7 +20,7 @@ export default function MovieReviewsView() {
 
   return (
     <>
-      {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+      {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
         <div>
           <ul>

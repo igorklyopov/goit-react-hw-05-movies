@@ -21,6 +21,7 @@ import {
 } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
+import Loader from "../../components/Loader/Loader";
 ///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({
@@ -92,7 +93,7 @@ export default function HomePage() {
         >
           Trending today
         </Typography>
-        {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+        {loadStatus === loadingStatus.PENDING && <Loader />}
         {loadStatus === loadingStatus.RESOLVED && (
           <MoviesGallery movies={movies} url={"/movies"} />
         )}

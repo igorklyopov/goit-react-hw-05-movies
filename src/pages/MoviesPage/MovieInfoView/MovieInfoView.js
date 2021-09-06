@@ -4,6 +4,7 @@ import { NavLink, useRouteMatch } from "react-router-dom";
 import { BASE_IMG_URL } from "../../../services/moviesApiConstants";
 import { fetchMovieById } from "../../../services/moviesApiService";
 import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
+import Loader from "../../../components/Loader/Loader";
 
 import MovieReviewsView from "../MovieReviewsView/MovieReviewsView";
 import MovieCastView from "../MovieCastView/MovieCastView";
@@ -30,7 +31,7 @@ export default function MovieInfoView() {
 
   return (
     <>
-      {loadStatus === loadingStatus.PENDING && <h2>Loading...</h2>}
+      {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
         <>
           <div>
