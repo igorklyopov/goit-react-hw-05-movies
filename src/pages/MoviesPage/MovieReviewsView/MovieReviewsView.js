@@ -6,9 +6,8 @@ import Loader from "../../../components/Loader/Loader";
 import Reviews from "../../../components/Reviews/Reviews";
 // let movieId = 385128;
 let pageNumber = 1;
-export default function MovieReviewsView() {
+export default function MovieReviewsView({ movieId }) {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
-  const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);

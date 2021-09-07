@@ -79,7 +79,6 @@ export default function MoviesPage() {
 
     fetchMoviesByName(searchQuery, pageNumber)
       .then((movies) => {
-        // console.log(movies);
         setMovies(movies.results);
         setLoadStatus(loadingStatus.RESOLVED);
       })

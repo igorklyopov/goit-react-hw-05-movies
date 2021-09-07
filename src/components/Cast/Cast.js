@@ -1,21 +1,21 @@
+import { useParams } from "react-router";
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 
-export default function Cast({ cast }) {
+export default function Cast({ castData }) {
   return (
     <section>
       <ul>
-        {cast &&
-          cast.map((item) => (
-            <li key={item.id}>
-              <img
-                src={`${BASE_IMG_URL}${item.profile_path}`}
-                alt={item.name}
-                width="250"
-              />
-              <p>{item.name}</p>
-              <p>{item.character}</p>
-            </li>
-          ))}
+        {castData.map((cast) => (
+          <li key={cast.id}>
+            <img
+              src={`${BASE_IMG_URL}${cast.profile_path}`}
+              alt={cast.name}
+              width="250"
+            />
+            <p>{cast.name}</p>
+            <p>{cast.character}</p>
+          </li>
+        ))}
       </ul>
     </section>
   );

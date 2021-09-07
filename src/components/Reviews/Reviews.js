@@ -1,14 +1,13 @@
-export default function Reviews({ reviews }) {
+export default function Reviews({ reviewsData }) {
   return (
     <section>
       <ul>
-        {reviews &&
-          reviews.map((review) => (
-            <li key={review.id}>
-              <p>{review.author}</p>
-              <p>{review.content}</p>
-            </li>
-          ))}
+        {reviewsData.map((review) => (
+          <li key={review.id}>
+            <p>{review.author}</p>
+            <p>{review.content}</p>
+          </li>
+        ))}
       </ul>
     </section>
   );
