@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { Route, useParams } from "react-router";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import Container from "@material-ui/core/Container";
@@ -33,12 +33,14 @@ export default function MovieInfoView() {
           <MovieInfoCard movie={movie} />
           <NavLink to={`${url}/cast`}>Cast</NavLink>
           <NavLink to={`${url}/reviews`}>Reviews</NavLink>
-          <Route path={`${path}/cast`}>
-            <MovieCastView movieId={movieId} />
-          </Route>
-          <Route path={`${path}/reviews`}>
-            <MovieReviewsView movieId={movieId} />
-          </Route>
+          <Suspense fallback={<Loader />}>
+            <Route path={`${path}/cast`}>
+              <MovieCastView movieId={movieId} />
+            </Route>
+            <Route path={`${path}/reviews`}>
+              <MovieReviewsView movieId={movieId} />
+            </Route>
+          </Suspense>
         </Container>
       )}
       {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}

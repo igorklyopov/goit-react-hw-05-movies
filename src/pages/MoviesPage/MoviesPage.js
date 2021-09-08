@@ -57,14 +57,14 @@ export default function MoviesPage() {
 
   return (
     <>
-      <section className="movieSearch">
+      <section className="movieInfo">
         <Container maxWidth="false">
           <h1 className="visuallyHidden">
             Find and view detailed movie information
           </h1>
-          {loadStatus === loadingStatus.IDLE && (
-            <SearchMoviesForm getFormData={onSearchFormSubmit} />
-          )}
+
+          <SearchMoviesForm getFormData={onSearchFormSubmit} />
+
           {loadStatus === loadingStatus.PENDING && <Loader />}
           {loadStatus === loadingStatus.RESOLVED && (
             <MoviesGallery movies={movies} url={url} />
