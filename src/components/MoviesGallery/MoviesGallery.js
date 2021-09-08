@@ -14,22 +14,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 // import Link from "@material-ui/core/Link";
-import "../../index.css";
+
 //////////////////////////////////
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 ///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
@@ -45,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
 }));
 
 const onMovieCardClick = (e) => {
@@ -61,16 +47,16 @@ export default function MoviesGallery({ movies, url }) {
   // const { url } = useRouteMatch();
 
   return (
-    <Grid container spacing={4}>
+    <Grid container component="ul" spacing={4} className="list">
       {movies.map((movie) => (
-        <Grid component="ul" item key={movie.id} xs={12} sm={6} md={4}>
-          <Card
-            component="li"
-            className={classes.card}
-            onClick={onMovieCardClick}
-            data-id={movie.id}
-          >
-            <Link to={`${url}/${movie.id}`}>
+        <Grid component="li" item key={movie.id} xs={12} sm={6} md={4}>
+          <Link to={`${url}/${movie.id}`}>
+            <Card
+              component="div"
+              className={classes.card}
+              onClick={onMovieCardClick}
+              data-id={movie.id}
+            >
               <CardMedia
                 component="img"
                 className={classes.cardMedia}
@@ -89,8 +75,8 @@ export default function MoviesGallery({ movies, url }) {
                       View
                     </Button> */}
               </CardActions>
-            </Link>
-          </Card>
+            </Card>
+          </Link>
         </Grid>
       ))}
     </Grid>

@@ -11,10 +11,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { GlobalCss } from "./commonStyles/GlobalCss";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import "./index.css";
+
 //////////////////////////////////
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -33,34 +34,11 @@ import {
 ///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardMedia: {
-    // paddingTop: "56.25%", // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+  button: {
+    backgroundColor: "green",
+    "&:hover": {
+      backgroundColor: "red",
+    },
   },
 }));
 
@@ -69,8 +47,11 @@ export default function App() {
 
   return (
     <>
-      <CssBaseline />
+      <GlobalCss />
       <Header />
+      {/* <Button variant="contained" className={classes.button}>
+        Primary
+      </Button> */}
       <main>
         <Switch>
           <Route path="/" exact>

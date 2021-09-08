@@ -15,8 +15,6 @@ export default function MovieInfoView() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
-  // console.log("MovieInfoView path", path);
-  // console.log("MovieInfoView url", url);
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
@@ -31,7 +29,7 @@ export default function MovieInfoView() {
     <>
       {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
-        <Container maxWidth="sm">
+        <Container maxWidth="false">
           <MovieInfoCard movie={movie} />
           <NavLink to={`${url}/cast`}>Cast</NavLink>
           <NavLink to={`${url}/reviews`}>Reviews</NavLink>

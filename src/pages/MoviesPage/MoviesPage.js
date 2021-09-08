@@ -14,53 +14,17 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import "../../index.css";
+
 //////////////////////////////////
 import SearchMoviesForm from "../../components/SearchMoviesForm/SearchMoviesForm";
 import { useState, useEffect } from "react";
-import {
-  fetchMoviesByName,
-  fetchPopularMoviesDay,
-  fetchMovieById,
-  fetchMovieCast,
-  fetchMovieReviews,
-} from "../../services/moviesApiService";
+import { fetchMoviesByName } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 ///////////////////////////////////
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardMedia: {
-    // paddingTop: "56.25%", // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 export default function MoviesPage() {
   const classes = useStyles();
@@ -93,19 +57,11 @@ export default function MoviesPage() {
 
   return (
     <>
-      <CssBaseline />
-      {/* Hero unit */}
-      <div className="content">
-        <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
-            Movies search
-          </Typography>
+      <section className="movieSearch">
+        <Container maxWidth="false">
+          <h1 className="visuallyHidden">
+            Find and view detailed movie information
+          </h1>
           {loadStatus === loadingStatus.IDLE && (
             <SearchMoviesForm getFormData={onSearchFormSubmit} />
           )}
@@ -139,8 +95,7 @@ export default function MoviesPage() {
               </Grid>
             </div> */}
         </Container>
-      </div>
-      {/* End hero unit */}
+      </section>
     </>
   );
 }
