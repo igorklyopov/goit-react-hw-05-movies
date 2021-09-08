@@ -6,9 +6,13 @@ import { fetchMovieById } from "../../../services/moviesApiService";
 import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
 import Loader from "../../../components/Loader/Loader";
 
-import MovieReviewsView from "../MovieReviewsView/MovieReviewsView";
-import MovieCastView from "../MovieCastView/MovieCastView";
+// import MovieReviewsView from "../MovieReviewsView/MovieReviewsView";
+// import MovieCastView from "../MovieCastView/MovieCastView";
 import MovieInfoCard from "../../../components/MovieInfoCard/MovieInfoCard";
+const MovieReviewsView = lazy(() =>
+  import("../MovieReviewsView/MovieReviewsView")
+);
+const MovieCastView = lazy(() => import("../MovieCastView/MovieCastView"));
 
 export default function MovieInfoView() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
