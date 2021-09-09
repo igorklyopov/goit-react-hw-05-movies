@@ -27,9 +27,9 @@ const HomePage = lazy(() =>
 const MoviesPage = lazy(() =>
   import("./pages/MoviesPage/MoviesPage" /* webpackChunkName: "movies-page" */)
 );
-const MovieInfoView = lazy(() =>
+const MovieDetailsPage = lazy(() =>
   import(
-    "./pages/MoviesPage/MovieInfoView/MovieInfoView" /* webpackChunkName: "movies-info-view" */
+    "./pages/MovieDetailsPage/MovieDetailsPage" /* webpackChunkName: "movies-details-page" */
   )
 );
 
@@ -62,7 +62,7 @@ export default function App() {
               <MoviesPage />
             </Route>
             <Route path="/movies/:movieId">
-              <MovieInfoView />
+              <MovieDetailsPage />
             </Route>
             <Route>
               <Redirect to="/" />

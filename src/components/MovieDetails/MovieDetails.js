@@ -1,6 +1,6 @@
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 
-export default function MovieInfoCard({ movie }) {
+export default function MovieDetails({ movie }) {
   const movieGenres =
     movie !== null
       ? movie.genres.map((genre) => genre.name).join(", ")

@@ -1,33 +1,33 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-// import { StyledSearchForm, StyledSearchFormInput } from "./StyledSearchForm";
-// import IconButton from "../IconButton/IconButton";
-// import { ReactComponent as IconSearch } from "../../images/search.svg";
 
 function SearchMoviesForm({ getFormData }) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const onInputChange = (e) => {
-    setSearchQuery(e.target.value.toLowerCase());
+    setInputValue(e.target.value.toLowerCase());
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    getFormData(inputValue.trim());
 
-    getFormData(searchQuery.trim());
-    setSearchQuery("");
+    setInputValue("");
   };
 
   return (
     <form onSubmit={onFormSubmit}>
-      <input
-        type="text"
-        autoComplete="off"
-        autoFocus
-        placeholder="Enter the title of the movie"
-        value={searchQuery}
-        onChange={onInputChange}
-      />
+      <label>
+        <span className="visuallyHidden">Search movie by title</span>
+        <input
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Enter the title of the movie"
+          value={inputValue}
+          onChange={onInputChange}
+        />
+      </label>
       <button type="submit">Search</button>
     </form>
   );

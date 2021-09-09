@@ -41,7 +41,6 @@ export default function HomePage() {
   }, [pageNumber]);
 
   // const { url } = useRouteMatch();
-  // console.log(url);
 
   const onNextPageClick = () => {
     setPageNumber(pageNumber + 1);

@@ -1,24 +1,26 @@
 import { useState, useEffect, Suspense, lazy } from "react";
-import { Route, useParams } from "react-router";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { Route, useHistory, useParams } from "react-router";
+import { NavLink, useRouteMatch, useLocation, Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import { fetchMovieById } from "../../../services/moviesApiService";
-import { loadingStatus } from "../../../utils/loadingStateStatusConstants";
-import Loader from "../../../components/Loader/Loader";
+import { fetchMovieById } from "../../services/moviesApiService";
+import { loadingStatus } from "../../utils/loadingStateStatusConstants";
+import Loader from "../../components/Loader/Loader";
+import MovieDetails from "../../components/MovieDetails/MovieDetails";
+const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
+const Cast = lazy(() => import("../../components/Cast/Cast"));
 
-// import MovieReviewsView from "../MovieReviewsView/MovieReviewsView";
-// import MovieCastView from "../MovieCastView/MovieCastView";
-import MovieInfoCard from "../../../components/MovieInfoCard/MovieInfoCard";
-const MovieReviewsView = lazy(() =>
-  import("../MovieReviewsView/MovieReviewsView")
-);
-const MovieCastView = lazy(() => import("../MovieCastView/MovieCastView"));
-
-export default function MovieInfoView() {
+export default function MovieDetailsPage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
-  const { movieId } = useParams();
+  let { movieId } = useParams();
   const { url, path } = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
+  const [prevLocation, setPrevLocation] = useState(
+    location?.state?.from ?? "/"
+  );
+
+  console.log("prevLocation", prevLocation);
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
@@ -34,15 +36,16 @@ export default function MovieInfoView() {
       {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
         <Container maxWidth="false">
-          <MovieInfoCard movie={movie} />
+          <Link to={prevLocation}>{`< Go back`}</Link>
+          <MovieDetails movie={movie} />
           <NavLink to={`${url}/cast`}>Cast</NavLink>
           <NavLink to={`${url}/reviews`}>Reviews</NavLink>
           <Suspense fallback={<Loader />}>
             <Route path={`${path}/cast`}>
-              <MovieCastView movieId={movieId} />
+              <Cast />
             </Route>
             <Route path={`${path}/reviews`}>
-              <MovieReviewsView movieId={movieId} />
+              <Reviews />
             </Route>
           </Suspense>
         </Container>

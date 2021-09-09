@@ -1,5 +1,12 @@
 import React from "react";
-import { NavLink, Link, useRouteMatch, Route, Switch } from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  useRouteMatch,
+  Route,
+  Switch,
+  useLocation,
+} from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -39,23 +46,29 @@ const useStyles = makeStyles((theme) => ({
 
 const onMovieCardClick = (e) => {
   // e.preventDefault();
-  // console.log("click card", e.currentTarget.dataset.id);
+  console.log("click card");
 };
 
 export default function MoviesGallery({ movies, url }) {
   const classes = useStyles();
   // const { url } = useRouteMatch();
+  const location = useLocation();
 
   return (
     <Grid container component="ul" spacing={4} className="list">
       {movies.map((movie) => (
         <Grid component="li" item key={movie.id} xs={12} sm={6} md={4}>
-          <Link to={`${url}/${movie.id}`}>
+          <Link
+            to={{
+              pathname: `${url}/${movie.id}`,
+              state: { from: location },
+            }}
+          >
             <Card
               component="div"
               className={classes.card}
               onClick={onMovieCardClick}
-              data-id={movie.id}
+              // data-id={movie.id}
             >
               <CardMedia
                 component="img"
