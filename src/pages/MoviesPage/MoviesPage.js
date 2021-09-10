@@ -20,14 +20,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
-//////////////////////////////////
 import SearchMoviesForm from "../../components/SearchMoviesForm/SearchMoviesForm";
 import { useState, useEffect } from "react";
 import { fetchMoviesByName } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
-///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -60,7 +58,6 @@ export default function MoviesPage() {
     history.push({ ...location, search: `query=${searchQuery}` });
   };
 
-  console.log("MoviesPage render");
   return (
     <>
       <section className="movieDetails">

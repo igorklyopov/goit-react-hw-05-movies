@@ -20,8 +20,6 @@ export default function MovieDetailsPage() {
     location?.state?.from ?? "/"
   );
 
-  console.log("prevLocation", prevLocation);
-
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
 

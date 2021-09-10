@@ -8,8 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-// import "../../index.css";
-//////////////////////////////////
+
 import { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import {
@@ -22,7 +21,6 @@ import {
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
-///////////////////////////////////
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -40,12 +38,10 @@ export default function HomePage() {
     });
   }, [pageNumber]);
 
-  // const { url } = useRouteMatch();
-
   const onNextPageClick = () => {
     setPageNumber(pageNumber + 1);
-    console.log("onLoadMoreClick");
   };
+
   const classes = useStyles();
 
   return (

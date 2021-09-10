@@ -21,6 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
+import noPhoto from "../../images/no-photo.jpg";
 
 const useStyles = makeStyles((theme) => ({
   castCardGrid: {
@@ -31,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "transparent",
   },
   castCardImg: {
-    // paddingTop: "56.25%", // 16:9
+    height: "250px",
   },
   castCardContent: {
     flexGrow: 1,
@@ -44,22 +46,26 @@ export default function CastList({ castData }) {
   const classes = useStyles();
 
   return (
-    <Grid container component="ul" spacing={4} className="list">
+    <Grid container component="ul" spacing={2} className="list">
       {castData.map((cast) => (
-        <Grid component="li" item key={cast.id} xs={12} sm={6} md={4}>
+        <Grid component="li" item key={cast.id} xs={6} sm={3} md={2}>
           <Card component="div" className={classes.castCard}>
             <CardMedia
               component="img"
               className={classes.castCardImg}
-              src={`${BASE_IMG_URL}${cast.profile_path}`}
+              src={
+                cast.profile_path
+                  ? `${BASE_IMG_URL}${cast.profile_path}`
+                  : noPhoto
+              }
               alt={cast.name}
             />
             <CardContent className={classes.cardCardContent}>
-              <Typography gutterBottom variant="h5" component="p">
+              <Typography variant="subtitle2" align="center" component="p">
                 {cast.name}
               </Typography>
-              <Typography gutterBottom variant="h5" component="p">
-                {cast.character}
+              <Typography variant="caption" align="center" component="p">
+                ({cast.character})
               </Typography>
             </CardContent>
           </Card>
@@ -67,21 +73,4 @@ export default function CastList({ castData }) {
       ))}
     </Grid>
   );
-}
-
-//////////////////////////////
-{
-  /* <ul>
-  {castData.map((cast) => (
-    <li key={cast.id}>
-      <img
-        src={`${BASE_IMG_URL}${cast.profile_path}`}
-        alt={cast.name}
-        width="250"
-      />
-      <p>{cast.name}</p>
-      <p>{cast.character}</p>
-    </li>
-  ))}
-</ul>; */
 }

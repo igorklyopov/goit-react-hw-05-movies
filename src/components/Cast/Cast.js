@@ -5,7 +5,7 @@ import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import Loader from "../../components/Loader/Loader";
 import { CastForEducationRounded } from "@material-ui/icons";
 import CastList from "../CastList/CastList";
-// let movieId = 385128;
+
 export default function Cast() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [cast, setCast] = useState(null);

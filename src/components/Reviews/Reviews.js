@@ -4,8 +4,8 @@ import { fetchMovieReviews } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import Loader from "../../components/Loader/Loader";
 import ReviewsList from "../../components/ReviewsList/ReviewsList";
-// let movieId = 385128;
-let pageNumber = 1;
+
+let pageNumber = 1; //for test
 export default function Reviews() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [reviews, setReviews] = useState(null);

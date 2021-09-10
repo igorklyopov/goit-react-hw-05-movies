@@ -20,11 +20,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-// import Link from "@material-ui/core/Link";
 
-//////////////////////////////////
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
-///////////////////////////////////
+import noImage from "../../images/no-image.jpg";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -36,22 +34,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  cardMedia: {
-    // paddingTop: "56.25%", // 16:9
-  },
+  cardMedia: {},
   cardContent: {
     flexGrow: 1,
   },
 }));
 
-const onMovieCardClick = (e) => {
-  // e.preventDefault();
-  console.log("click card");
-};
-
 export default function MoviesGallery({ movies, url }) {
   const classes = useStyles();
-  // const { url } = useRouteMatch();
   const location = useLocation();
 
   return (
@@ -64,21 +54,26 @@ export default function MoviesGallery({ movies, url }) {
               state: { from: location },
             }}
           >
-            <Card
-              component="div"
-              className={classes.card}
-              onClick={onMovieCardClick}
-              // data-id={movie.id}
-            >
+            <Card component="div" className={classes.card}>
               <CardMedia
                 component="img"
                 className={classes.cardMedia}
-                src={`${BASE_IMG_URL}${movie.poster_path}`}
+                src={
+                  movie.poster_path
+                    ? `${BASE_IMG_URL}${movie.poster_path}`
+                    : noImage
+                }
                 alt={movie.title}
                 title={movie.title}
+                height="80%"
               />
               <CardContent className={classes.cardContent}>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  align="center"
+                  component="h2"
+                >
                   {movie.title}
                 </Typography>
                 {/* <Typography>{movie.overview}</Typography> */}
