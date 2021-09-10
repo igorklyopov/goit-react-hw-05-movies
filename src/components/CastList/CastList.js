@@ -1,25 +1,12 @@
 import React from "react";
-import {
-  NavLink,
-  Link,
-  useRouteMatch,
-  Route,
-  Switch,
-  useLocation,
-} from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import PropTypes from "prop-types";
+
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 import noPhoto from "../../images/no-photo.jpg";
 
@@ -47,25 +34,21 @@ export default function CastList({ castData }) {
 
   return (
     <Grid container component="ul" spacing={2} className="list">
-      {castData.map((cast) => (
-        <Grid component="li" item key={cast.id} xs={6} sm={3} md={2}>
+      {castData.map(({ id, profile_path, name, character }) => (
+        <Grid component="li" item key={id} xs={6} sm={3} md={2}>
           <Card component="div" className={classes.castCard}>
             <CardMedia
               component="img"
               className={classes.castCardImg}
-              src={
-                cast.profile_path
-                  ? `${BASE_IMG_URL}${cast.profile_path}`
-                  : noPhoto
-              }
-              alt={cast.name}
+              src={profile_path ? `${BASE_IMG_URL}${profile_path}` : noPhoto}
+              alt={name}
             />
             <CardContent className={classes.cardCardContent}>
               <Typography variant="subtitle2" align="center" component="p">
-                {cast.name}
+                {name}
               </Typography>
               <Typography variant="caption" align="center" component="p">
-                ({cast.character})
+                ({character})
               </Typography>
             </CardContent>
           </Card>
@@ -74,3 +57,14 @@ export default function CastList({ castData }) {
     </Grid>
   );
 }
+
+CastList.propTypes = {
+  castData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      profile_path: PropTypes.string,
+      name: PropTypes.string,
+      character: PropTypes.string,
+    })
+  ),
+};

@@ -49,9 +49,6 @@ export default function App() {
     <>
       <GlobalCss />
       <Header />
-      {/* <Button variant="contained" className={classes.button}>
-        Primary
-      </Button> */}
       <main>
         <Suspense fallback={<Loader />}>
           <Switch>

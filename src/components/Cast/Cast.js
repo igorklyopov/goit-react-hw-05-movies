@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, useRouteMatch } from "react-router";
+import { useParams } from "react-router";
+
 import { fetchMovieCast } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import Loader from "../../components/Loader/Loader";
-import { CastForEducationRounded } from "@material-ui/icons";
 import CastList from "../CastList/CastList";
 
 export default function Cast() {

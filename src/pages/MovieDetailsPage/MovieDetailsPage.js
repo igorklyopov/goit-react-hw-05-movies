@@ -2,12 +2,18 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import { Route, useHistory, useParams } from "react-router";
 import { NavLink, useRouteMatch, useLocation, Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+
 import { fetchMovieById } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import Loader from "../../components/Loader/Loader";
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
-const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
-const Cast = lazy(() => import("../../components/Cast/Cast"));
+
+const Reviews = lazy(() =>
+  import("../../components/Reviews/Reviews" /* webpackChunkName: "reviews" */)
+);
+const Cast = lazy(() =>
+  import("../../components/Cast/Cast" /* webpackChunkName: "cast" */)
+);
 
 export default function MovieDetailsPage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -33,7 +39,7 @@ export default function MovieDetailsPage() {
     <>
       {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
-        <Container maxWidth="false">
+        <Container>
           <Link to={prevLocation}>{`< Go back`}</Link>
           <MovieDetails movie={movie} />
           <NavLink to={`${url}/cast`}>Cast</NavLink>
