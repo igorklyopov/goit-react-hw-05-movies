@@ -1,31 +1,34 @@
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 
 export default function MovieDetails({ movie }) {
+  const { poster_path, title, overview, vote_average, vote_count } = movie;
+
   const movieGenres =
     movie !== null
       ? movie.genres.map((genre) => genre.name).join(", ")
       : "Unknown";
 
+  const formattedReleaseDate = movie.release_date
+    .split("-")
+    .reverse()
+    .join(".");
+
   return (
     <div>
-      <img
-        src={`${BASE_IMG_URL}${movie.poster_path}`}
-        alt={movie.title}
-        width="250"
-      />
-      <h3>{movie.title}</h3>
-      <p>Release date: {movie.release_date}</p>
+      <img src={`${BASE_IMG_URL}${poster_path}`} alt={title} width="250" />
+      <h3>{title}</h3>
+      <p>Release date: {formattedReleaseDate}</p>
       <p>
         <span>Genre: </span>
         <span>{movieGenres}</span>
       </p>
-      <p>{movie.overview}</p>
+      <p>{overview}</p>
       <p>
-        {movie.vote_average !== 0 ? (
+        {vote_average !== 0 ? (
           <>
-            <span>rating: </span>
-            <span>{movie.vote_average} </span>
-            <span>(based on {movie.vote_count} reviews)</span>
+            <span>Rating: </span>
+            <span>{vote_average} </span>
+            <span>(based on {vote_count} reviews)</span>
           </>
         ) : (
           <span> No reviews yet </span>

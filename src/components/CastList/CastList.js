@@ -47,9 +47,11 @@ export default function CastList({ castData }) {
               <Typography variant="subtitle2" align="center" component="p">
                 {name}
               </Typography>
-              <Typography variant="caption" align="center" component="p">
-                ({character})
-              </Typography>
+              {character && (
+                <Typography variant="caption" align="center" component="p">
+                  ({character})
+                </Typography>
+              )}
             </CardContent>
           </Card>
         </Grid>
