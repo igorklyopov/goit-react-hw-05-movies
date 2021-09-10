@@ -4,20 +4,33 @@ import { fetchMovieReviews } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import Loader from "../../components/Loader/Loader";
 import ReviewsList from "../../components/ReviewsList/ReviewsList";
+import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
 
 let pageNumber = 1; //for test
 export default function Reviews() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [reviews, setReviews] = useState(null);
+  const [error, setError] = useState("");
   const { movieId } = useParams();
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
 
-    fetchMovieReviews(movieId, pageNumber).then((response) => {
-      setReviews(response.results);
-      setLoadStatus(loadingStatus.RESOLVED);
-    });
+    fetchMovieReviews(movieId, pageNumber)
+      .then((response) => {
+        setReviews(response.results);
+
+        if (response.results.length !== 0) {
+          setLoadStatus(loadingStatus.RESOLVED);
+        } else {
+          setError("There are no reviews yet...");
+          setLoadStatus(loadingStatus.REJECTED);
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoadStatus(loadingStatus.REJECTED);
+      });
   }, [movieId]);
 
   return (
@@ -26,8 +39,9 @@ export default function Reviews() {
       {loadStatus === loadingStatus.RESOLVED && (
         <ReviewsList reviewsData={reviews} />
       )}
-      {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
+      {loadStatus === loadingStatus.REJECTED && (
+        <ErrorNotification message={error} />
+      )}
     </>
   );
 }
-// There are no reviews yet...

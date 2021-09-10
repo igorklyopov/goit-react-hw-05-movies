@@ -14,7 +14,7 @@ export default function MovieDetails({ movie }) {
         width="250"
       />
       <h3>{movie.title}</h3>
-      <p>{movie.release_date}</p>
+      <p>Release date: {movie.release_date}</p>
       <p>
         <span>Genre: </span>
         <span>{movieGenres}</span>

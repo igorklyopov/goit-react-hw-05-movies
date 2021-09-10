@@ -4,6 +4,7 @@ function handlingResponseStatus(response) {
   if (response.ok) {
     return response.json();
   }
+  console.error("server response: ", response.status);
   throw new Error("Sorry, something went wrong ...");
 }
 

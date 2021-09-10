@@ -9,6 +9,8 @@ import { fetchMoviesByName } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
+import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
+import errorImg from "../../images/hedgehog-in-the-fog.jpeg";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -17,22 +19,37 @@ export default function MoviesPage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [error, setError] = useState(null);
   const { url } = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
 
   const searchQuery = new URLSearchParams(location.search).get("query");
-  console.log("searchQuery:", searchQuery);
+
   useEffect(() => {
     if (searchQuery === null) return;
+    if (searchQuery === "") {
+      setError("Please enter the title of the movie!");
+      setLoadStatus(loadingStatus.REJECTED);
+      return;
+    }
 
     setLoadStatus(loadingStatus.PENDING);
     fetchMoviesByName(searchQuery, pageNumber)
       .then((movies) => {
         setMovies(movies.results);
-        setLoadStatus(loadingStatus.RESOLVED);
+
+        if (movies.results.length !== 0) {
+          setLoadStatus(loadingStatus.RESOLVED);
+        } else {
+          setError(`No results were found for "${searchQuery}"!`);
+          setLoadStatus(loadingStatus.REJECTED);
+        }
       })
-      .catch(() => console.error("fetchMoviesByName response not Ok"));
+      .catch((error) => {
+        setError(error.message);
+        setLoadStatus(loadingStatus.REJECTED);
+      });
   }, [searchQuery, location, pageNumber]);
 
   const onSearchFormSubmit = (searchQuery) => {
@@ -55,7 +72,9 @@ export default function MoviesPage() {
           {loadStatus === loadingStatus.RESOLVED && (
             <MoviesGallery movies={movies} url={url} />
           )}
-          {loadStatus === loadingStatus.REJECTED && <h2>Oops...</h2>}
+          {loadStatus === loadingStatus.REJECTED && (
+            <ErrorNotification message={error} />
+          )}
         </Container>
       </section>
     </>
