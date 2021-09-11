@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import StylesSearchMoviesForm from "./StylesSearchForm";
+import StylesSearchMoviesForm from "./StylesSearchMoviesForm";
 import ButtonSearch from "../../components/ButtonSearch/ButtonSearch";
 
 function SearchMoviesForm({ getFormData }) {

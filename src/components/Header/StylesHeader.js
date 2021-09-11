@@ -23,9 +23,12 @@ const StylesHeader = makeStyles((theme) => ({
     "&:hover": {
       color: themeColors.accent,
     },
+    "&:focus": {
+      color: themeColors.accent,
+    },
   },
   navLinkActive: {
-    color: themeColors.primaryLightText,
+    color: themeColors.accent,
   },
 }));
 

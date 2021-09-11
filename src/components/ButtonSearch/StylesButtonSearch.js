@@ -21,6 +21,9 @@ const StylesButtonSearch = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: themeColors.darkTintPrimaryLightBg,
     },
+    "&:focus": {
+      backgroundColor: themeColors.darkTintPrimaryLightBg,
+    },
   },
   searchIcon: {
     color: "currentColor",

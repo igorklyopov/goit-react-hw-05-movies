@@ -32,6 +32,7 @@ export const GlobalCss = withStyles({
       textDecoration: "none",
       fontStyle: "normal",
       color: "inherit",
+      outline: "none",
     },
     ".button": {
       cursor: "pointer",

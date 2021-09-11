@@ -9,8 +9,7 @@ import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
-
-const useStyles = makeStyles((theme) => ({}));
+import StylesHomePage from "./StylesHomePage";
 
 export default function HomePage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -32,25 +31,17 @@ export default function HomePage() {
       });
   }, [pageNumber]);
 
-  const onNextPageClick = () => {
-    setPageNumber(pageNumber + 1);
-  };
+  // const onNextPageClick = () => {
+  //   setPageNumber(pageNumber + 1);
+  // };
 
-  const classes = useStyles();
+  const classes = StylesHomePage();
 
   return (
     <>
       <section>
         <Container maxWidth={false}>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
-            Trending today
-          </Typography>
+          <h1 className={classes.homePageTitle}>Trending today</h1>
           {loadStatus === loadingStatus.PENDING && <Loader />}
           {loadStatus === loadingStatus.RESOLVED && (
             <MoviesGallery movies={movies} url={"/movies"} />
@@ -58,9 +49,9 @@ export default function HomePage() {
           {loadStatus === loadingStatus.REJECTED && (
             <ErrorNotification message={error} />
           )}
-          <button type="button" onClick={onNextPageClick}>
+          {/* <button type="button" onClick={onNextPageClick}>
             Load more
-          </button>
+          </button> */}
         </Container>
       </section>
     </>
