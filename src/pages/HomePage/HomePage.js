@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { fetchPopularMoviesDay } from "../../services/moviesApiService";
@@ -40,7 +38,7 @@ export default function HomePage() {
   return (
     <>
       <section>
-        <Container maxWidth={false}>
+        <Container maxWidth={"md"}>
           <h1 className={classes.homePageTitle}>Trending today</h1>
           {loadStatus === loadingStatus.PENDING && <Loader />}
           {loadStatus === loadingStatus.RESOLVED && (

@@ -22,6 +22,10 @@ export const GlobalCss = withStyles({
       backgroundColor: themeColors.primaryLightBg,
       color: themeColors.primaryDarkText,
     },
+    img: {
+      display: "block",
+      maxWidth: "100%",
+    },
     ".list": {
       listStyle: "none",
       marginTop: 0,

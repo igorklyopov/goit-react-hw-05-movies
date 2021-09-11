@@ -20,9 +20,6 @@ const StylesHeader = makeStyles((theme) => ({
     padding: "10px",
     fontWeight: "700",
 
-    "&:hover": {
-      color: themeColors.accent,
-    },
     "&:focus": {
       color: themeColors.accent,
     },

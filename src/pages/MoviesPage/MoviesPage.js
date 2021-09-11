@@ -1,21 +1,15 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import SearchMoviesForm from "../../components/SearchMoviesForm/SearchMoviesForm";
-import { useState, useEffect } from "react";
 import { fetchMoviesByName } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
-import errorImg from "../../images/hedgehog-in-the-fog.jpeg";
-
-const useStyles = makeStyles((theme) => ({}));
 
 export default function MoviesPage() {
-  const classes = useStyles();
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
@@ -61,7 +55,7 @@ export default function MoviesPage() {
   return (
     <>
       <section className="movieDetails">
-        <Container maxWidth={false}>
+        <Container maxWidth={"md"}>
           <h1 className="visuallyHidden">
             Find and view detailed movie information
           </h1>

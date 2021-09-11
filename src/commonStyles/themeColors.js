@@ -7,7 +7,6 @@ const themeColors = {
   primaryDarkBg: "#007c91",
   primaryDarkBgGradient:
     "linear-gradient(90deg, rgba(0,124,145,1) 0%, rgba(93,222,244,1) 100%)",
-  secondaryDarkBg: "#007c91",
   accent: "#ffd274",
 };
 
