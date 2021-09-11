@@ -2,31 +2,22 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles } from "@material-ui/core/styles";
 
-import { themeColors } from "../../commonStyles/themeColors";
-
-const useStyles = makeStyles((theme) => ({
-  header: {
-    color: themeColors.primaryDarkText,
-    backgroundColor: themeColors.primaryDarkBg,
-    backgroundImage: themeColors.primaryDarkBgGradient,
-  },
-}));
+import StylesHeader from "./StylesHeader";
 
 export default function Header() {
-  const classes = useStyles();
+  const classes = StylesHeader();
 
   return (
     <AppBar position="relative" className={classes.header}>
       <Toolbar component="nav">
-        <ul className="list">
-          <li>
+        <ul className={`list ${classes.navList}`}>
+          <li className={classes.navListItem}>
             <NavLink
               exact
               to="/"
-              className="link-nav"
-              activeClassName="active-link-nav"
+              className={`link ${classes.navLink}`}
+              activeClassName={classes.navLinkActive}
             >
               Home
             </NavLink>
@@ -34,8 +25,8 @@ export default function Header() {
           <li>
             <NavLink
               to="/movies"
-              className="link-nav"
-              activeClassName="active-link-nav"
+              className={`link ${classes.navLink}`}
+              activeClassName={classes.navLinkActive}
             >
               Movies
             </NavLink>
