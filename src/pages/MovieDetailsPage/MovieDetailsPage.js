@@ -39,7 +39,7 @@ export default function MovieDetailsPage() {
     <>
       {loadStatus === loadingStatus.PENDING && <Loader />}
       {loadStatus === loadingStatus.RESOLVED && (
-        <Container>
+        <Container maxWidth={false}>
           <Link to={prevLocation}>{`< Go back`}</Link>
           <MovieDetails movie={movie} />
           <NavLink to={`${url}/cast`}>Cast</NavLink>

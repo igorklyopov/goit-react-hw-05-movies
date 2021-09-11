@@ -1,15 +1,26 @@
 import { withStyles } from "@material-ui/core/styles";
+import { themeColors } from "./themeColors";
 
 export const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
   "@global": {
+    "*": {
+      boxSizing: "border-box",
+    },
+    "*::before": {
+      boxSizing: "border-box",
+    },
+    "*::after": {
+      boxSizing: "border-box",
+    },
     body: {
       margin: 0,
       fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif`,
       lineHeight: "1.3",
-      backgroundColor: "#e0f7fa",
+      backgroundColor: themeColors.primaryLightBg,
+      color: themeColors.primaryDarkText,
     },
     ".list": {
       listStyle: "none",

@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   movieImg: {
     height: "450px",
-    // objectFit: "none",
   },
   cardContent: {
     flexGrow: 1,

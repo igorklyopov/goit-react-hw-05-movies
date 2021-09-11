@@ -41,7 +41,7 @@ export default function HomePage() {
   return (
     <>
       <section>
-        <Container>
+        <Container maxWidth={false}>
           <Typography
             component="h1"
             variant="h2"

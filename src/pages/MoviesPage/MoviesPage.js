@@ -61,7 +61,7 @@ export default function MoviesPage() {
   return (
     <>
       <section className="movieDetails">
-        <Container>
+        <Container maxWidth={false}>
           <h1 className="visuallyHidden">
             Find and view detailed movie information
           </h1>
