@@ -13,7 +13,11 @@ export const GlobalCss = withStyles({
     "*::after": {
       boxSizing: "border-box",
     },
+    html: {
+      height: "100%",
+    },
     body: {
+      height: "100%",
       margin: 0,
       fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -25,6 +29,26 @@ export const GlobalCss = withStyles({
     img: {
       display: "block",
       maxWidth: "100%",
+    },
+    footer: {
+      flexGrow: 0,
+      flexShrink: 0,
+      flexBasis: "auto",
+      // flex: `0 0 auto`,
+    },
+    "#root": {
+      height: "100%",
+    },
+    ".page-wrap": {
+      display: "flex",
+      flexDirection: "column",
+      minHeight: "100%",
+    },
+    ".content": {
+      flexGrow: 1,
+      flexShrink: 0,
+      flexBasis: "auto",
+      // flex: `1 0 auto`,
     },
     ".list": {
       listStyle: "none",
