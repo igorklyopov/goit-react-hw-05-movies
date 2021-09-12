@@ -27,20 +27,22 @@ export default function MovieDetails({ movie }) {
         src={`${BASE_IMG_URL}${poster_path}`}
         alt={title}
         className={classes.movieDetailsImg}
-        // height="80%"
       />
       <CardContent className={classes.movieDetailsContent}>
         <h2>{title}</h2>
-        <p>Release date: {formattedReleaseDate}</p>
         <p>
-          <span>Genre: </span>
-          <span>{movieGenres}</span>
+          <span className={classes.movieDetailsSubTitle}>Release date: </span>
+          {formattedReleaseDate}
+        </p>
+        <p>
+          <span className={classes.movieDetailsSubTitle}>Genre: </span>
+          {movieGenres}
         </p>
         <p>{overview}</p>
         <p>
           {vote_average !== 0 ? (
             <>
-              <span>Rating: </span>
+              <span className={classes.movieDetailsSubTitle}>Rating: </span>
               <span>{vote_average} </span>
               <span>(based on {vote_count} reviews)</span>
             </>

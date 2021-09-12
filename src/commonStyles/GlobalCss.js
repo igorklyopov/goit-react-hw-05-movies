@@ -34,7 +34,6 @@ export const GlobalCss = withStyles({
       flexGrow: 0,
       flexShrink: 0,
       flexBasis: "auto",
-      // flex: `0 0 auto`,
     },
     "#root": {
       height: "100%",
@@ -48,7 +47,6 @@ export const GlobalCss = withStyles({
       flexGrow: 1,
       flexShrink: 0,
       flexBasis: "auto",
-      // flex: `1 0 auto`,
     },
     ".list": {
       listStyle: "none",

@@ -4,36 +4,22 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 import { BASE_IMG_URL } from "../../services/moviesApiConstants";
 import noPhoto from "../../images/no-photo.jpg";
-
-const useStyles = makeStyles((theme) => ({
-  castCardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  castCard: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "transparent",
-  },
-  castCardImg: {
-    height: "250px",
-  },
-  castCardContent: {
-    flexGrow: 1,
-  },
-}));
+import StylesCastLis from "./StylesCastList";
 
 export default function CastList({ castData }) {
-  const classes = useStyles();
+  const classes = StylesCastLis();
 
   return (
-    <Grid container component="ul" spacing={2} className="list">
+    <Grid
+      container
+      component="ul"
+      spacing={2}
+      className={`list ${classes.castCardList}`}
+    >
       {castData.map(({ id, profile_path, name, character }) => (
         <Grid component="li" item key={id} xs={6} sm={3} md={2}>
           <Card component="div" className={classes.castCard}>
@@ -44,7 +30,12 @@ export default function CastList({ castData }) {
               alt={name}
             />
             <CardContent className={classes.cardCardContent}>
-              <Typography variant="subtitle2" align="center" component="p">
+              <Typography
+                variant="subtitle2"
+                align="center"
+                component="p"
+                className={classes.castSubTitle}
+              >
                 {name}
               </Typography>
               {character && (

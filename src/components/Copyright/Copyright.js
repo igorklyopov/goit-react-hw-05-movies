@@ -10,6 +10,7 @@ function Copyright() {
         href="https://github.com/igorklyopov"
         target="_blank"
         rel="noopener noreferrer"
+        className="link"
       >
         by Igor Klyopov
       </Link>{" "}

@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
+import StylesReviewsList from "./StylesReviewsList";
 
 export default function ReviewsList({ reviewsData }) {
+  const classes = StylesReviewsList();
+
   return (
-    <ul>
+    <ul className="list">
       {reviewsData.map(({ id, author, content }) => (
-        <li key={id}>
-          <p>{author}</p>
-          <p>{content}</p>
+        <li key={id} className={classes.reviewsListItem}>
+          <span className={classes.reviewsListAuthor}>{author}</span>
+          <p className={classes.reviewsListText}>{content}</p>
         </li>
       ))}
     </ul>

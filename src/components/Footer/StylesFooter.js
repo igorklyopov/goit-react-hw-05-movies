@@ -6,7 +6,7 @@ const StylesFooter = makeStyles((theme) => ({
     color: themeColors.primaryDarkText,
     backgroundColor: themeColors.primaryDarkBg,
     backgroundImage: themeColors.primaryDarkBgGradient,
-    padding: theme.spacing(6),
+    padding: theme.spacing(2),
   },
 }));
 

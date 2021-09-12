@@ -27,5 +27,9 @@ const StylesMovieDetails = makeStyles((theme) => ({
       paddingLeft: "30px",
     },
   },
+  movieDetailsSubTitle: {
+    fontWeight: "700",
+    color: themeColors.primaryDarkBg,
+  },
 }));
 export default StylesMovieDetails;
