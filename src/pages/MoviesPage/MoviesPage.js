@@ -8,6 +8,7 @@ import { loadingStatus } from "../../utils/loadingStateStatusConstants";
 import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
+import errorImg from "../../images/hedgehog-in-the-fog.jpg";
 
 export default function MoviesPage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -67,7 +68,7 @@ export default function MoviesPage() {
             <MoviesGallery movies={movies} url={url} />
           )}
           {loadStatus === loadingStatus.REJECTED && (
-            <ErrorNotification message={error} />
+            <ErrorNotification message={error} img={errorImg} />
           )}
         </Container>
       </section>

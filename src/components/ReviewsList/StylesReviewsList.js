@@ -16,6 +16,7 @@ const StylesReviewsList = makeStyles((theme) => ({
   reviewsListText: {
     margin: 0,
     paddingLeft: "30px",
+    wordBreak: "break-word",
   },
 }));
 

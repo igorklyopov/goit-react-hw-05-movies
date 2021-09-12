@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
+import StylesErrorNotification from "./StylesErrorNotification";
 
 export default function ErrorNotification({ message, img }) {
+  const classes = StylesErrorNotification();
   return (
     <>
-      <p>{message}</p>
-      {img && <img src={img} alt={message} width="250" />}
+      <p className={classes.errorMessage}>{message}</p>
+      {img && <img src={img} alt={message} className={classes.errorImg} />}
     </>
   );
 }
