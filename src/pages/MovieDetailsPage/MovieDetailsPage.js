@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, lazy } from "react";
-import { Route, useHistory, useParams } from "react-router";
+import { Route, useParams } from "react-router";
 import { NavLink, useRouteMatch, useLocation, Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -24,7 +24,6 @@ export default function MovieDetailsPage() {
   let { movieId } = useParams();
   const { url, path } = useRouteMatch();
   const location = useLocation();
-  const history = useHistory();
   const [prevLocation, setPrevLocation] = useState(
     location?.state?.from ?? "/"
   );

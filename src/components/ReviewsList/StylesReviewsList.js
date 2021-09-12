@@ -18,6 +18,25 @@ const StylesReviewsList = makeStyles((theme) => ({
     paddingLeft: "30px",
     wordBreak: "break-word",
   },
+  showMoreTextBtn: {
+    display: "inline-block",
+    width: "150px",
+    padding: "3px",
+    textAlign: "center",
+    color: themeColors.primaryDarkBg,
+    borderRadius: "5px",
+    textDecoration: "underline",
+    backgroundColor: "transparent",
+
+    "&:hover": {
+      backgroundColor: themeColors.darkTintPrimaryLightBg,
+      textDecoration: "none",
+    },
+    "&:focus": {
+      backgroundColor: themeColors.darkTintPrimaryLightBg,
+      textDecoration: "none",
+    },
+  },
 }));
 
 export default StylesReviewsList;

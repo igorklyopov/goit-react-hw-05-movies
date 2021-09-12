@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ShowMoreText from "react-show-more-text";
 import StylesReviewsList from "./StylesReviewsList";
 
 export default function ReviewsList({ reviewsData }) {
@@ -9,7 +10,16 @@ export default function ReviewsList({ reviewsData }) {
       {reviewsData.map(({ id, author, content }) => (
         <li key={id} className={classes.reviewsListItem}>
           <span className={classes.reviewsListAuthor}>{author}</span>
-          <p className={classes.reviewsListText}>{content}</p>
+          <ShowMoreText
+            lines={5}
+            more="Show more>"
+            less="<Show less"
+            anchorClass={`link ${classes.showMoreTextBtn}`}
+            expanded={false}
+            truncatedEndingComponent={"... "}
+          >
+            <p className={classes.reviewsListText}>{content}</p>
+          </ShowMoreText>
         </li>
       ))}
     </ul>
