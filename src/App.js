@@ -5,6 +5,7 @@ import { GlobalCss } from "./commonStyles/GlobalCss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
+import ScrollToTop from "./components/ScrollToTopBtn/ScrollToTopBtn";
 
 const HomePage = lazy(() =>
   import("./pages/HomePage/HomePage" /* webpackChunkName: "home-page" */)
@@ -43,6 +44,7 @@ export default function App() {
           </Suspense>
         </main>
         <Footer />
+        <ScrollToTop />
       </div>
     </>
   );
