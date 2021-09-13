@@ -13,7 +13,6 @@ import errorImg from "../../images/hedgehog-in-the-fog.jpg";
 import StylesPagination from "../../components/Pagination/StylesPagination";
 
 export default function MoviesPage() {
-  const [newSearchQuery, setNewSearchQuery] = useState(null);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -29,7 +28,7 @@ export default function MoviesPage() {
   const styles = StylesPagination();
 
   useEffect(() => {
-    if (searchQuery === newSearchQuery || null) return;
+    if (searchQuery === null) return;
     if (searchQuery === "") {
       setError("Please enter the title of the movie!");
       setLoadStatus(loadingStatus.REJECTED);
@@ -43,11 +42,9 @@ export default function MoviesPage() {
         setTotalPages(total_pages);
 
         if (results.length !== 0) {
-          setNewSearchQuery(searchQuery);
           setLoadStatus(loadingStatus.RESOLVED);
         } else {
-          setNewSearchQuery(null);
-          setError(`No results were found for "${searchQuery}"!`);
+          setError("No results were found for this query!");
           setLoadStatus(loadingStatus.REJECTED);
         }
       })

@@ -20,8 +20,6 @@ function SearchMoviesForm({ getFormData }) {
   const onFormSubmit = (e) => {
     e.preventDefault();
     getFormData(inputValue.trim().toLowerCase());
-
-    setInputValue("");
   };
 
   const onClearBtnClick = () => {
