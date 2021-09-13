@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { themeColors } from "../../commonStyles/themeColors";
+import { themeColors } from "../../commonStyles/themeVariables";
 
 const StylesPagination = makeStyles({
   pagination: {

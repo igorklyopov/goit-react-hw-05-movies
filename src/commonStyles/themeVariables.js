@@ -10,4 +10,8 @@ const themeColors = {
   accent: "#ffd274",
 };
 
-export { themeColors };
+const themeAnimation = {
+  timingFn: "cubic-bezier(0.4, 0, 0.2, 1)",
+};
+
+export { themeColors, themeAnimation };

@@ -23,7 +23,7 @@ export default function MoviesGallery({ movies, url }) {
       className={`list ${classes.moviesGalleryContainer}`}
     >
       {movies.map(({ id, poster_path, title }) => (
-        <Grid component="li" item key={id} xs={12} sm={6} md={4}>
+        <Grid component="li" item key={id} xs={12} sm={6} md={3}>
           <Link
             to={{
               pathname: `${url}/${id}`,

@@ -1,5 +1,5 @@
 import { withStyles } from "@material-ui/core/styles";
-import { themeColors } from "./themeColors";
+import { themeColors } from "./themeVariables";
 
 export const GlobalCss = withStyles({
   // @global is handled by jss-plugin-global.
