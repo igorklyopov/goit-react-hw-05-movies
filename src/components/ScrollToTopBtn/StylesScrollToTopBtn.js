@@ -14,6 +14,7 @@ const StylesScrollToTopBtn = makeStyles({
     borderRadius: "50%",
     backgroundColor: themeColors.darkTintPrimaryLightBg,
     color: themeColors.primaryDarkBg,
+    opacity: "0.5",
 
     "&:hover": {
       backgroundColor: themeColors.primaryDarkBg,
