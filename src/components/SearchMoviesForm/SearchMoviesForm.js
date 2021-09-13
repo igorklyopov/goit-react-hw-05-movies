@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import StylesSearchMoviesForm from "./StylesSearchMoviesForm";
 import ButtonSearch from "../../components/ButtonSearch/ButtonSearch";
@@ -7,6 +7,11 @@ import ButtonClear from "../../components/ButtonClear/ButtonClear";
 function SearchMoviesForm({ getFormData }) {
   const classes = StylesSearchMoviesForm();
   const [inputValue, setInputValue] = useState("");
+  const [showClearBtn, setShowClearBtn] = useState(false);
+
+  useEffect(() => {
+    inputValue === "" ? setShowClearBtn(false) : setShowClearBtn(true);
+  }, [inputValue]);
 
   const onInputChange = (e) => {
     setInputValue(e.target.value);
@@ -39,7 +44,7 @@ function SearchMoviesForm({ getFormData }) {
           />
         </label>
         <ButtonSearch />
-        <ButtonClear onClick={onClearBtnClick} />
+        {showClearBtn && <ButtonClear onClick={onClearBtnClick} />}
       </div>
     </form>
   );
