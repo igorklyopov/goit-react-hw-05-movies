@@ -34,7 +34,6 @@ export default function MoviesGallery({ movies, url }) {
             <Card component="div" className={classes.movieCard}>
               <CardMedia
                 component="img"
-                className={classes.movieImg}
                 src={poster_path ? `${BASE_IMG_URL}${poster_path}` : noImage}
                 alt={title}
                 title={title}

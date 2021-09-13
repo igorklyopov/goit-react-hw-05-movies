@@ -1,6 +1,7 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router";
 import Container from "@material-ui/core/Container";
+import Pagination from "@material-ui/lab/Pagination";
 
 import { fetchPopularMoviesDay } from "../../services/moviesApiService";
 import { loadingStatus } from "../../utils/loadingStateStatusConstants";
@@ -8,19 +9,26 @@ import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
 import StylesHomePage from "./StylesHomePage";
+import StylesPagination from "../../components/Pagination/StylesPagination";
 
 export default function HomePage() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const history = useHistory();
+
+  const pageNumber = new URLSearchParams(location.search).get("page") ?? 1;
+  const activePage = parseInt(pageNumber);
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
 
     fetchPopularMoviesDay(pageNumber)
-      .then((movies) => {
-        setMovies(movies.results);
+      .then(({ results, total_pages }) => {
+        setMovies(results);
+        setTotalPages(total_pages);
         setLoadStatus(loadingStatus.RESOLVED);
       })
       .catch((error) => {
@@ -29,11 +37,12 @@ export default function HomePage() {
       });
   }, [pageNumber]);
 
-  // const onNextPageClick = () => {
-  //   setPageNumber(pageNumber + 1);
-  // };
+  const onPageChange = (event, value) => {
+    history.push({ ...location, search: `page=${value}` });
+  };
 
   const classes = StylesHomePage();
+  const styles = StylesPagination();
 
   return (
     <>
@@ -47,9 +56,15 @@ export default function HomePage() {
           {loadStatus === loadingStatus.REJECTED && (
             <ErrorNotification message={error} />
           )}
-          {/* <button type="button" onClick={onNextPageClick}>
-            Load more
-          </button> */}
+          {totalPages > 1 && (
+            <Pagination
+              className={styles.pagination}
+              size="large"
+              count={totalPages}
+              page={activePage}
+              onChange={onPageChange}
+            />
+          )}
         </Container>
       </section>
     </>

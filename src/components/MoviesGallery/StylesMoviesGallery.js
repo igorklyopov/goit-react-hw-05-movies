@@ -28,9 +28,6 @@ const StylesMoviesGallery = makeStyles((theme) => ({
     background: "inherit",
     boxShadow: "inherit",
   },
-  movieImg: {
-    height: "450px",
-  },
   cardContent: {
     flexGrow: 1,
   },

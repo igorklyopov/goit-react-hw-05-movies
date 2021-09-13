@@ -12,7 +12,8 @@ const StylesCastLis = makeStyles((theme) => ({
     backgroundColor: "transparent",
   },
   castCardImg: {
-    height: "250px",
+    maxHeight: "100%",
+    minHeight: "250px",
   },
   castCardContent: {
     flexGrow: 1,

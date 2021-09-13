@@ -32,9 +32,9 @@ function fetchMovieCast(movieId) {
   ).then(handlingResponseStatus);
 }
 
-function fetchMovieReviews(movieId, pageNumber) {
+function fetchMovieReviews(movieId) {
   return fetch(
-    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNumber}`
+    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
   ).then(handlingResponseStatus);
 }
 

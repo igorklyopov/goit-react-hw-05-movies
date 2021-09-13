@@ -6,7 +6,6 @@ import Loader from "../../components/Loader/Loader";
 import ReviewsList from "../../components/ReviewsList/ReviewsList";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
 
-let pageNumber = 1; //for test
 export default function Reviews() {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [reviews, setReviews] = useState(null);
@@ -16,11 +15,11 @@ export default function Reviews() {
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
 
-    fetchMovieReviews(movieId, pageNumber)
-      .then((response) => {
-        setReviews(response.results);
+    fetchMovieReviews(movieId)
+      .then(({ results }) => {
+        setReviews(results);
 
-        if (response.results.length !== 0) {
+        if (results.length !== 0) {
           setLoadStatus(loadingStatus.RESOLVED);
         } else {
           setError("There are no reviews yet...");

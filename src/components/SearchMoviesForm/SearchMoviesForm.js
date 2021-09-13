@@ -8,12 +8,12 @@ function SearchMoviesForm({ getFormData }) {
   const [inputValue, setInputValue] = useState("");
 
   const onInputChange = (e) => {
-    setInputValue(e.target.value.toLowerCase());
+    setInputValue(e.target.value);
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    getFormData(inputValue.trim());
+    getFormData(inputValue.trim().toLowerCase());
 
     setInputValue("");
   };

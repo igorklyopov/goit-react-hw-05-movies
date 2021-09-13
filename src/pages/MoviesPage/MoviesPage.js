@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+import Pagination from "@material-ui/lab/Pagination";
 
 import SearchMoviesForm from "../../components/SearchMoviesForm/SearchMoviesForm";
 import { fetchMoviesByName } from "../../services/moviesApiService";
@@ -9,20 +10,26 @@ import MoviesGallery from "../../components/MoviesGallery/MoviesGallery";
 import Loader from "../../components/Loader/Loader";
 import ErrorNotification from "../../components/ErrorNotification/ErrorNotification";
 import errorImg from "../../images/hedgehog-in-the-fog.jpg";
+import StylesPagination from "../../components/Pagination/StylesPagination";
 
 export default function MoviesPage() {
+  const [newSearchQuery, setNewSearchQuery] = useState(null);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movies, setMovies] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
   const { url } = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
 
   const searchQuery = new URLSearchParams(location.search).get("query");
+  const pageNumber = new URLSearchParams(location.search).get("page") ?? 1;
+  const activePage = parseInt(pageNumber);
+
+  const styles = StylesPagination();
 
   useEffect(() => {
-    if (searchQuery === null) return;
+    if (searchQuery === newSearchQuery || null) return;
     if (searchQuery === "") {
       setError("Please enter the title of the movie!");
       setLoadStatus(loadingStatus.REJECTED);
@@ -31,12 +38,15 @@ export default function MoviesPage() {
 
     setLoadStatus(loadingStatus.PENDING);
     fetchMoviesByName(searchQuery, pageNumber)
-      .then((movies) => {
-        setMovies(movies.results);
+      .then(({ results, total_pages }) => {
+        setMovies(results);
+        setTotalPages(total_pages);
 
-        if (movies.results.length !== 0) {
+        if (results.length !== 0) {
+          setNewSearchQuery(searchQuery);
           setLoadStatus(loadingStatus.RESOLVED);
         } else {
+          setNewSearchQuery(null);
           setError(`No results were found for "${searchQuery}"!`);
           setLoadStatus(loadingStatus.REJECTED);
         }
@@ -45,12 +55,14 @@ export default function MoviesPage() {
         setError(error.message);
         setLoadStatus(loadingStatus.REJECTED);
       });
-  }, [searchQuery, location, pageNumber]);
+  }, [searchQuery, pageNumber]);
 
   const onSearchFormSubmit = (searchQuery) => {
-    // setSearchQuery(searchQuery);
-    // setPageNumber(1);
     history.push({ ...location, search: `query=${searchQuery}` });
+  };
+
+  const onPageChange = (event, value) => {
+    history.push({ ...location, search: `query=${searchQuery}&page=${value}` });
   };
 
   return (
@@ -69,6 +81,15 @@ export default function MoviesPage() {
           )}
           {loadStatus === loadingStatus.REJECTED && (
             <ErrorNotification message={error} img={errorImg} />
+          )}
+          {totalPages > 1 && (
+            <Pagination
+              className={styles.pagination}
+              size="large"
+              count={totalPages}
+              page={activePage}
+              onChange={onPageChange}
+            />
           )}
         </Container>
       </section>
