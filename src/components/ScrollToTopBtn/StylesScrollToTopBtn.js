@@ -19,6 +19,10 @@ const StylesScrollToTopBtn = makeStyles({
       backgroundColor: themeColors.primaryDarkBg,
       color: themeColors.primaryLightBg,
     },
+    "&:focus": {
+      backgroundColor: themeColors.primaryDarkBg,
+      color: themeColors.primaryLightBg,
+    },
   },
 });
 

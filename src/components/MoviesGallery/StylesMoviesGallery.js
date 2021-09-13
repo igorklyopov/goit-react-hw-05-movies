@@ -8,8 +8,8 @@ const StylesMoviesGallery = makeStyles((theme) => ({
   moviesGalleryLink: {
     display: "block",
     background: "transparent",
-    transitionProperty: "transform",
-    transitionDuration: "500ms",
+    transitionProperty: "transform, box-shadow",
+    transitionDuration: "300ms",
     transitionTimingFunction: themeAnimation.timingFn,
     transitionDelay: 0,
 

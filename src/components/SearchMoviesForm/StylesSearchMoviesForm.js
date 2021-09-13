@@ -34,7 +34,7 @@ const StylesSearchMoviesForm = makeStyles((theme) => ({
     borderRadius: "30px",
     outline: "none",
     paddingLeft: "20px",
-    paddingRight: "20px",
+    paddingRight: "110px",
     color: themeColors.primaryDarkText,
 
     "&::placeholder": {

@@ -37,7 +37,6 @@ export default function MoviesGallery({ movies, url }) {
                 src={poster_path ? `${BASE_IMG_URL}${poster_path}` : noImage}
                 alt={title}
                 title={title}
-                height="80%"
               />
               <CardContent className={classes.cardContent}>
                 <Typography

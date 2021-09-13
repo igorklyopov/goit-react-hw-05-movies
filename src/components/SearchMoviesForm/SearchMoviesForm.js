@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import StylesSearchMoviesForm from "./StylesSearchMoviesForm";
 import ButtonSearch from "../../components/ButtonSearch/ButtonSearch";
+import ButtonClear from "../../components/ButtonClear/ButtonClear";
 
 function SearchMoviesForm({ getFormData }) {
   const classes = StylesSearchMoviesForm();
@@ -18,6 +19,10 @@ function SearchMoviesForm({ getFormData }) {
     setInputValue("");
   };
 
+  const onClearBtnClick = () => {
+    setInputValue("");
+  };
+
   return (
     <form className={classes.searchMoviesForm} onSubmit={onFormSubmit}>
       <div className={classes.searchMoviesFormInputWrap}>
@@ -27,13 +32,14 @@ function SearchMoviesForm({ getFormData }) {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Enter the title of the movie"
+            placeholder="Enter the movie"
             value={inputValue}
             className={classes.searchMoviesFormInput}
             onChange={onInputChange}
           />
         </label>
         <ButtonSearch />
+        <ButtonClear onClick={onClearBtnClick} />
       </div>
     </form>
   );
